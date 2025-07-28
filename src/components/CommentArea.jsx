@@ -10,9 +10,8 @@ class CommentArea extends Component {
     isLoading: true,
     isError: false,
   };
-  oneComment = () => {};
 
-  componentDidMount = async () => {
+  getComments = async () => {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -29,7 +28,7 @@ class CommentArea extends Component {
         let comments = await response.json();
         console.log(comments);
         this.setState({
-          comments: comments[0].comment,
+          comments: this.props.newComment,
           isLoading: false,
           isError: false,
         });
@@ -41,6 +40,11 @@ class CommentArea extends Component {
       this.setState({ isLoading: false, isError: true });
     }
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.newComment !== this.props.newComment) {
+      this.getComments();
+    }
+  }
 
   render() {
     return (
@@ -48,7 +52,7 @@ class CommentArea extends Component {
         {this.state.isLoading && <Loading />}
         {this.state.isError && <Error />}
         <AddComment asin={this.props.asin} />
-        {/* <CommentList commentsToShow={this.state.comments} /> */}
+        <CommentList commentsToShow={this.state.comments} />
       </div>
     );
   }

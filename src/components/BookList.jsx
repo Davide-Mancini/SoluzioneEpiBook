@@ -12,11 +12,13 @@ class BookList extends Component {
     isLoading: true,
     isError: false,
   };
-  changeState = (newAsin) => {
+
+  changeState = (newAsin, newComment) => {
     console.log(newAsin);
     this.setState({
       selected: true,
       asin: newAsin,
+      comments: newComment,
     });
   };
 
@@ -67,10 +69,11 @@ class BookList extends Component {
             <CommentArea
               asin={this.state.asin}
               selected={this.state.selected}
-              // oneComment={this.oneComment()}
+              // newComment={this.changeState()}
             />
           </Col>
         </Row>
+        {this.state.selected && <CommentArea asin={this.state.asin} />}
       </>
     );
   }

@@ -28,7 +28,7 @@ class CommentArea extends Component {
         let comments = await response.json();
         console.log(comments);
         this.setState({
-          comments: this.props.newComment,
+          comments: comments,
           isLoading: false,
           isError: false,
         });
@@ -41,7 +41,7 @@ class CommentArea extends Component {
     }
   };
   componentDidUpdate(prevProps) {
-    if (prevProps.newComment !== this.props.newComment) {
+    if (prevProps.asin !== this.props.asin) {
       this.getComments();
     }
   }

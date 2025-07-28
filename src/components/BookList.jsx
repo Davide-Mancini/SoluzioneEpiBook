@@ -69,7 +69,7 @@ class BookList extends Component {
             <CommentArea
               asin={this.state.asin}
               selected={this.state.selected}
-              // newComment={this.changeState()}
+              newComment={this.changeState}
             />
           </Col>
         </Row>
